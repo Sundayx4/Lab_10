@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb2D;
+    Vector2 moveInput;
     float move;
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
@@ -18,10 +19,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //walk
+
+        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        rb2D.AddForce(moveInput * speed);
+
+/*        //walk
         move = Input.GetAxis("Horizontal");
         rb2D.linearVelocity = new Vector2(move * speed, rb2D.linearVelocity.y);
-
+*/
         //jump
         if (Input.GetButtonDown("Jump") && !isjumping) 
         {
